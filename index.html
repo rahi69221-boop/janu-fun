@@ -1,0 +1,2098 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Browser title -->
+  <title>janu.fun — Life Stats | जीवन के आँकड़े</title>
+
+  <style>
+    /* =========================================================
+       1. BASIC RESET
+       ========================================================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #ffffff;
+      color: #090909;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    /* =========================================================
+       2. TOP LOGO
+       ========================================================= */
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 58px;
+
+      display: flex;
+      align-items: center;
+
+      padding: 0 22px;
+
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(10px);
+
+      border-bottom: 1px solid #eeeeee;
+
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+    }
+
+    .logo span {
+      font-weight: 400;
+    }
+
+    /* =========================================================
+       3. GENERAL SCREEN / STORY SECTION
+       ========================================================= */
+
+    .screen {
+      min-height: 100vh;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+
+      padding: 90px 22px 70px;
+
+      position: relative;
+    }
+
+    h1 {
+      font-size: clamp(52px, 12vw, 105px);
+      line-height: 0.9;
+      letter-spacing: -5px;
+    }
+
+    h2 {
+      font-size: clamp(45px, 10vw, 82px);
+      line-height: 0.95;
+      letter-spacing: -3px;
+    }
+
+    .english {
+      font-size: clamp(20px, 4vw, 31px);
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .hindi {
+      font-size: clamp(17px, 3.5vw, 25px);
+      font-weight: 700;
+      line-height: 1.45;
+      margin-top: 8px;
+    }
+
+    .note {
+      color: #777777;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-top: 18px;
+      max-width: 650px;
+    }
+
+    /* =========================================================
+       4. LIFE START SCREEN
+       Baby -> child -> teenager -> adult -> old
+       ========================================================= */
+
+    .characters {
+      width: min(900px, 100%);
+      height: 280px;
+
+      position: relative;
+
+      margin-bottom: 15px;
+    }
+
+    .person {
+      position: absolute;
+      bottom: 20px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      transform: translateX(-50%);
+    }
+
+    .person::after {
+      content: "";
+
+      position: absolute;
+      bottom: -2px;
+
+      width: 120px;
+      height: 11px;
+
+      background: #dddddd;
+      border-radius: 50%;
+
+      z-index: -1;
+    }
+
+    .person .head {
+      width: 72px;
+      height: 72px;
+
+      border-radius: 50%;
+
+      background: #f2b07f;
+
+      border: 4px solid #111;
+
+      position: relative;
+    }
+
+    .person .head::before,
+    .person .head::after {
+      content: "";
+
+      position: absolute;
+
+      width: 8px;
+      height: 8px;
+
+      background: #111;
+
+      border-radius: 50%;
+
+      top: 28px;
+    }
+
+    .person .head::before {
+      left: 20px;
+    }
+
+    .person .head::after {
+      right: 20px;
+    }
+
+    .person .body {
+      width: 90px;
+      height: 110px;
+
+      background: var(--shirt);
+
+      border: 4px solid #111;
+
+      border-radius: 45px 45px 18px 18px;
+    }
+
+    .legs {
+      display: flex;
+      gap: 8px;
+    }
+
+    .leg {
+      width: 22px;
+      height: 62px;
+
+      background: #222;
+
+      border: 4px solid #111;
+
+      border-radius: 12px;
+    }
+
+    .p1 {
+      left: 8%;
+      --shirt: #72c6f0;
+      transform: translateX(-50%) scale(0.65);
+    }
+
+    .p2 {
+      left: 29%;
+      --shirt: #ffca4b;
+      transform: translateX(-50%) scale(0.82);
+    }
+
+    .p3 {
+      left: 50%;
+      --shirt: #ff6c79;
+      transform: translateX(-50%) scale(0.98);
+    }
+
+    .p4 {
+      left: 71%;
+      --shirt: #6acb8a;
+      transform: translateX(-50%) scale(1.08);
+    }
+
+    .p5 {
+      left: 92%;
+      --shirt: #aaaaaa;
+      transform: translateX(-50%) scale(1.14);
+    }
+
+    /* =========================================================
+       5. MAIN BUTTON
+       ========================================================= */
+
+    .main-btn {
+      border: 3px solid #111111;
+
+      background: #ff5261;
+      color: white;
+
+      font-size: clamp(24px, 6vw, 42px);
+      font-weight: 900;
+
+      padding: 18px 38px;
+
+      border-radius: 18px;
+
+      cursor: pointer;
+
+      box-shadow: 0 6px 0 #111111;
+
+      transition: transform 0.15s, box-shadow 0.15s;
+
+      margin-top: 28px;
+    }
+
+    .main-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .main-btn:active {
+      transform: translateY(5px);
+      box-shadow: 0 1px 0 #111111;
+    }
+
+    /* =========================================================
+       6. BIRTHDATE SCREEN
+       ========================================================= */
+
+    .birth-icon {
+      font-size: 95px;
+      margin-bottom: 10px;
+    }
+
+    .birth-form {
+      width: min(620px, 100%);
+      margin-top: 30px;
+    }
+
+    .birth-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .birth-fields input {
+      width: 100%;
+
+      padding: 17px 10px;
+
+      border: 2px solid #111111;
+      border-radius: 12px;
+
+      background: white;
+
+      font-size: 20px;
+
+      text-align: center;
+      outline: none;
+    }
+
+    .birth-fields input:focus {
+      box-shadow: 0 0 0 4px rgba(255,82,97,0.18);
+    }
+
+    .birth-fields input::placeholder {
+      color: #888888;
+    }
+
+    .error {
+      min-height: 24px;
+
+      margin-top: 10px;
+
+      color: #e53935;
+
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       7. CALENDAR
+       ========================================================= */
+
+    .calendar {
+      width: 195px;
+
+      background: white;
+
+      border: 3px solid #111111;
+      border-radius: 11px;
+
+      overflow: hidden;
+
+      box-shadow: 6px 6px 0 #111111;
+
+      margin-bottom: 50px;
+    }
+
+    .calendar-header {
+      background: #ff4757;
+      color: white;
+
+      font-size: 24px;
+      font-weight: 900;
+
+      padding: 12px;
+    }
+
+    .calendar-day {
+      font-size: 76px;
+      font-weight: 900;
+
+      padding: 17px 0 4px;
+    }
+
+    .calendar-date {
+      font-size: 20px;
+      font-weight: 800;
+
+      padding-bottom: 18px;
+    }
+
+    /* =========================================================
+       8. TEXT STAT
+       ========================================================= */
+
+    .stat-content {
+      width: min(800px, 100%);
+      text-align: left;
+    }
+
+    .big-stat {
+      font-size: clamp(30px, 7vw, 56px);
+      font-weight: 900;
+
+      line-height: 1.15;
+    }
+
+    .big-stat span {
+      color: #ff4d5c;
+    }
+
+    .heart {
+      font-size: 145px;
+
+      margin-bottom: 45px;
+
+      animation: heartbeat 1s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      15% {
+        transform: scale(1.13);
+      }
+
+      30% {
+        transform: scale(1);
+      }
+    }
+
+    .blood-icon {
+      font-size: 115px;
+      margin-bottom: 45px;
+    }
+
+    .fade-stat {
+      color: #cccccc;
+      margin-top: 90px;
+    }
+
+    /* =========================================================
+       9. WEEKS GRID
+       ========================================================= */
+
+    .weeks-wrap {
+      width: min(900px, 100%);
+      margin-top: 30px;
+    }
+
+    .weeks-grid {
+      display: grid;
+
+      grid-template-columns: repeat(52, 1fr);
+
+      gap: 3px;
+    }
+
+    .week {
+      aspect-ratio: 1;
+
+      background: #dddddd;
+
+      border-radius: 2px;
+    }
+
+    .week.past {
+      background: #ff5261;
+    }
+
+    .week-legend {
+      margin-top: 15px;
+
+      color: #777777;
+
+      font-size: 14px;
+    }
+
+    /* =========================================================
+       10. FOOTER
+       ========================================================= */
+
+    footer {
+      padding: 60px 20px;
+
+      text-align: center;
+
+      border-top: 1px solid #eeeeee;
+    }
+
+
+    /* =========================================================
+       LIFE-STATS STORY SECTIONS
+       ========================================================= */
+
+    .life-stat-section {
+      scroll-snap-align: start;
+    }
+
+    .story-icon {
+      font-size: 115px;
+      line-height: 1;
+      margin-bottom: 45px;
+      user-select: none;
+      animation: storyFloat 3s ease-in-out infinite;
+    }
+
+    .life-stat-section .stat-content {
+      animation: storyRise 0.7s ease both;
+    }
+
+    @keyframes storyFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    @keyframes storyRise {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================================================
+       11. MOBILE
+       ========================================================= */
+
+    @media (max-width: 600px) {
+
+      .topbar {
+        height: 52px;
+        padding: 0 17px;
+      }
+
+      .logo {
+        font-size: 24px;
+      }
+
+      .screen {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .characters {
+        height: 215px;
+      }
+
+      .person .head {
+        width: 52px;
+        height: 52px;
+      }
+
+      .person .body {
+        width: 65px;
+        height: 82px;
+      }
+
+      .person .leg {
+        width: 17px;
+        height: 43px;
+      }
+
+      .person::after {
+        width: 85px;
+      }
+
+      .birth-fields {
+        gap: 7px;
+      }
+
+      .birth-fields input {
+        padding: 15px 5px;
+        font-size: 16px;
+      }
+
+      .weeks-grid {
+        grid-template-columns: repeat(26, 1fr);
+        gap: 3px;
+      }
+
+      .calendar {
+        width: 175px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =======================================================
+       FIXED LOGO
+       ======================================================= -->
+
+  <header class="topbar">
+    <div class="logo">janu<span>.fun</span></div>
+  </header>
+
+
+  <!-- =======================================================
+       SCREEN 1
+       LIFE START
+       ======================================================= -->
+
+  <section class="screen" id="lifeStart">
+
+    <!-- Cartoon life journey -->
+    <div class="characters">
+
+      <div class="person p1">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="legs">
+          <div class="leg"></div>
+          <div class="leg"></div>
+        </div>
+      </div>
+
+      <div class="person p2">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="legs">
+          <div class="leg"></div>
+          <div class="leg"></div>
+        </div>
+      </div>
+
+      <div class="person p3">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="legs">
+          <div class="leg"></div>
+          <div class="leg"></div>
+        </div>
+      </div>
+
+      <div class="person p4">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="legs">
+          <div class="leg"></div>
+          <div class="leg"></div>
+        </div>
+      </div>
+
+      <div class="person p5">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="legs">
+          <div class="leg"></div>
+          <div class="leg"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <h1>Life Start</h1>
+
+    <div class="hindi">
+      जीवन की शुरुआत
+    </div>
+
+    <button
+      class="main-btn"
+      onclick="goToBirth()">
+      LIFE START →
+    </button>
+
+    <p class="note">
+      Your personal life journey in numbers and stories.<br>
+      आपकी ज़िंदगी का सफ़र, आँकड़ों और कहानियों में।
+    </p>
+
+  </section>
+
+
+  <!-- =======================================================
+       SCREEN 2
+       BIRTHDATE INPUT
+       ======================================================= -->
+
+  <section class="screen" id="birthScreen">
+
+    <div class="birth-icon">
+      🧑‍💼
+    </div>
+
+    <h2>
+      Life Stats
+    </h2>
+
+    <div class="hindi">
+      जीवन के आँकड़े
+    </div>
+
+    <p
+      class="english"
+      style="margin-top:32px">
+      Your Birthdate
+    </p>
+
+    <p class="hindi">
+      आपकी जन्म तारीख
+    </p>
+
+    <div class="birth-form">
+
+      <div class="birth-fields">
+
+        <input
+          id="month"
+          type="number"
+          min="1"
+          max="12"
+          placeholder="Month">
+
+        <input
+          id="day"
+          type="number"
+          min="1"
+          max="31"
+          placeholder="Day">
+
+        <input
+          id="year"
+          type="number"
+          min="1900"
+          max="2026"
+          placeholder="Year">
+
+      </div>
+
+      <div
+        id="error"
+        class="error">
+      </div>
+
+      <button
+        class="main-btn"
+        onclick="startLifeStats()">
+        GO →→→
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       SCREEN 3
+       BIRTH DATE + DAYS
+       ======================================================= -->
+
+  <section class="screen" id="daysScreen">
+
+    <div class="calendar">
+
+      <div
+        id="weekday"
+        class="calendar-header">
+        DAY
+      </div>
+
+      <div
+        id="calendarDay"
+        class="calendar-day">
+        1
+      </div>
+
+      <div
+        id="calendarDate"
+        class="calendar-date">
+        Jan 2000
+      </div>
+
+    </div>
+
+    <div class="stat-content">
+
+      <div class="big-stat">
+
+        A lot has happened in the
+
+        <span id="daysLived">
+          0
+        </span>
+
+        days since you were born.
+
+      </div>
+
+      <div class="hindi">
+
+        आपके जन्म के बाद से
+
+        <span id="daysLivedHindi">
+          0
+        </span>
+
+        दिन बीत चुके हैं—इस दौरान बहुत कुछ हुआ है।
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       SCREEN 4
+       HEART
+       ======================================================= -->
+
+  <section class="screen">
+
+    <div class="heart">
+      ❤️
+    </div>
+
+    <div class="stat-content">
+
+      <div class="big-stat">
+
+        Your heart has beaten about
+
+        <span id="heartbeats">
+          0
+        </span>
+
+        times.
+
+      </div>
+
+      <div class="hindi">
+
+        आपका दिल लगभग
+
+        <span id="heartbeatsHindi">
+          0
+        </span>
+
+        बार धड़क चुका है।
+
+      </div>
+
+      <div
+        class="big-stat"
+        style="margin-top:25px">
+
+        That's roughly
+
+        <span id="bloodLiters">
+          0
+        </span>
+
+        L of blood pumped.
+
+      </div>
+
+      <div class="hindi">
+
+        अनुमान के अनुसार लगभग
+
+        <span id="bloodLitersHindi">
+          0
+        </span>
+
+        लीटर रक्त पंप हुआ है।
+
+      </div>
+
+    </div>
+
+    <p class="note">
+
+      These are educational estimates, not medical measurements.<br>
+
+      ये केवल अनुमानित आँकड़े हैं, चिकित्सकीय माप नहीं।
+
+    </p>
+
+  </section>
+
+
+
+  <!-- =======================================================
+       20-LIFE-STATS STORY
+       ======================================================= -->
+
+  <!-- 05: RED BLOOD CELLS -->
+  <section class="screen life-stat-section">
+    <div class="story-icon">🩸</div>
+    <div class="stat-content">
+      <div class="big-stat">
+        Your body has produced an estimated
+        <span id="redCells">0</span>
+        red blood cells.
+      </div>
+      <div class="hindi">
+        आपके शरीर ने अनुमानतः
+        <span id="redCellsHindi">0</span>
+        लाल रक्त कोशिकाएँ बनाई हैं।
+      </div>
+    </div>
+  </section>
+
+  <!-- 06: BREATHS + BLINKS -->
+  <section class="screen life-stat-section">
+    <div class="story-icon">〰️</div>
+    <div class="stat-content">
+      <div class="big-stat">
+        You've taken about
+        <span id="breaths">0</span>
+        breaths.
+      </div>
+      <div class="hindi">
+        आपने लगभग
+        <span id="breathsHindi">0</span>
+        साँसें ली हैं।
+      </div>
+
+      <div class="big-stat fade-stat">
+        You've blinked about
+        <span id="blinks">0</span>
+        times.
+      </div>
+      <div class="hindi fade-stat">
+        आपने लगभग
+        <span id="blinksHindi">0</span>
+        बार पलकें झपकाई हैं।
+      </div>
+    </div>
+  </section>
+
+  <!-- 07: SLEEP -->
+  <section class="screen life-stat-section">
+    <div class="story-icon">😴</div>
+    <div class="stat-content">
+      <div class="big-stat">
+        You've spent about
+        <span id="sleepYears">0</span>
+        years asleep.
+      </div>
+      <div class="hindi">
+        आपने लगभग
+        <span id="sleepYearsHindi">0</span>
+        साल सोते हुए बिताए हैं।
+      </div>
+
+      <div class="big-stat fade-stat">
+        That's about
+        <span id="sleepDays">0</span>
+        days of sleep.
+      </div>
+      <div class="hindi fade-stat">
+        यानी लगभग
+        <span id="sleepDaysHindi">0</span>
+        दिन की नींद।
+      </div>
+    </div>
+  </section>
+
+  <!-- 08: AWAKE -->
+  <section class="screen life-stat-section">
+    <div class="story-icon">☀️</div>
+    <div class="stat-content">
+      <div class="big-stat">
+        You've been awake for about
+        <span id="awakeYears">0</span>
+        years.
+      </div>
+      <div class="hindi">
+        आप लगभग
+        <span id="awakeYearsHindi">0</span>
+        साल जाग चुके हैं।
+      </div>
+
+      <div class="big-stat fade-stat">
+        That's roughly
+        <span id="awakeHours">0</span>
+        waking hours.
+      </div>
+      <div class="hindi fade-stat">
+        यानी लगभग
+        <span id="awakeHoursHindi">0</span>
+        घंटे जागने के।
+      </div>
+    </div>
+  </section>
+
+  <!-- 09: WALKING -->
+  <section class="screen life-stat-section">
+    <div class="story-icon">👣</div>
+    <div class="stat-content">
+      <div class="big-stat">
+        You may have walked around
+        <span id="steps">0</span>
+        steps.
+      </div>
+      <div class="hindi">
+        आपने अनुमानतः लगभग
+        <span id="stepsHindi">0</span>
+        कदम चले होंगे।
+      </div>
+
+      <div class="big-stat fade-stat">
+        That's about
+        <span id="walkKm">0</span>
+        km.
+      </div>
+      <div class="hindi fade-stat">
+        यानी लगभग
+        <span id="walkKmHindi">0</span>
+        किलोमीटर।
+      </div>
+    </div>
+  </section>
+
+  <!-- 10: MEALS -->
+  <section class="screen life-stat-section">
+    <div class="story-icon">🍽️</div>
+    <div class="stat-content">
+      <div class="big-stat">
+        You may have eaten around
+        <span id="meals">0</span>
+        meals.
+      </div>
+      <div class="hindi">
+        आपने अनुमानतः लगभग
+        <span id="mealsHindi">0</span>
+        भोजन किए होंगे।
+      </div>
+    </div>
+  </section>
+
+  <!-- 11: WATER -->
+  <section class="screen life-stat-section">
+    <div class="story-icon">💧</div>
+    <div class="stat-content">
+      <div class="big-stat">
+        You may have drunk about
+        <span id="waterLiters">0</span>
+        liters of water.
+      </div>
+      <div class="hindi">
+        आपने अनुमानतः लगभग
+        <span id="waterLitersHindi">0</span>
+        लीटर पानी पिया होगा।
+      </div>
+    </div>
+  </section>
+
+  <!-- 12: EATING TIME -->
+  <section class="screen life-stat-section">
+    <div class="story-icon">⏰🍴</div>
+    <div class="stat-content">
+      <div class="big-stat">
+        You may have spent about
+        <span id="eatingDays">0</span>
+        days eating.
+      </div>
+      <div class="hindi">
+        आपने लगभग
+        <span id="eatingDaysHindi">0</span>
+        दिन भोजन करने में बिताए होंगे।
+      </div>
+    </div>
+  </section>
+
+  <!-- 13: SHOWERS -->
+  <section class="screen life-stat-section">
+    <div class="story-icon">🚿</div>
+    <div class="stat-content">
+      <div class="big-stat">
+        That's roughly
+        <span id="showers">0</span>
+        showers or baths.
+      </div>
+      <div class="hindi">
+        यानी लगभग
+        <span id="showersHindi">0</span>
+        बार नहाना।
+      </div>
+    </div>
+  </section>
+
+  <!-- 14: HAIR -->
+  <section class="screen life-stat-section">
+    <div class="story-icon">💇</div>
+    <div class="stat-content">
+      <div class="big-stat">
+        If all your hair growth were added together,
+        that's roughly
+        <span id="hairMeters">0</span>
+        meters.
+      </div>
+      <div class="hindi">
+        अगर बालों की बढ़त को जोड़ें, तो यह लगभग
+        <span id="hairMetersHindi">0</span>
+        मीटर हो सकती है।
+      </div>
+      <p class="note">
+        Fun estimate based on an adjustable average.
+        वास्तविक वृद्धि व्यक्ति-व्यक्ति अलग होती है।
+      </p>
+    </div>
+  </section>
+
+  <!-- 15: NAILS -->
+  <section class="screen life-stat-section">
+    <div class="story-icon">💅</div>
+    <div class="stat-content">
+      <div class="big-stat">
+        Your fingernails may have grown about
+        <span id="nailsMeters">0</span>
+        meters in total.
+      </div>
+      <div class="hindi">
+        आपकी उँगलियों के नाखूनों की कुल बढ़त लगभग
+        <span id="nailsMetersHindi">0</span>
+        मीटर हो सकती है।
+      </div>
+    </div>
+  </section>
+
+  <!-- 16: LAUGHTER -->
+  <section class="screen life-stat-section">
+    <div class="story-icon">😂</div>
+    <div class="stat-content">
+      <div class="big-stat">
+        At an assumed 15 laughs a day,
+        that's about
+        <span id="laughs">0</span>
+        laughs.
+      </div>
+      <div class="hindi">
+        रोज़ 15 हँसी मानें, तो लगभग
+        <span id="laughsHindi">0</span>
+        बार हँसी होगी।
+      </div>
+      <p class="note">
+        Playful estimate — not a measured personal statistic.
+        यह केवल मज़ेदार अनुमान है।
+      </p>
+    </div>
+  </section>
+
+  <!-- 17: YAWS -->
+  <section class="screen life-stat-section">
+    <div class="story-icon">🥱</div>
+    <div class="stat-content">
+      <div class="big-stat">
+        At an assumed 5 yawns a day,
+        that's about
+        <span id="yawns">0</span>
+        yawns.
+      </div>
+      <div class="hindi">
+        रोज़ 5 जम्हाई मानें, तो लगभग
+        <span id="yawnsHindi">0</span>
+        जम्हाइयाँ।
+      </div>
+      <p class="note">
+        Playful estimate — real frequency varies a lot.
+        वास्तविक संख्या काफी अलग हो सकती है।
+      </p>
+    </div>
+  </section>
+
+  <!-- 18: BIRTHDAYS -->
+  <section class="screen life-stat-section">
+    <div class="story-icon">🎂</div>
+    <div class="stat-content">
+      <div class="big-stat">
+        You've had about
+        <span id="birthdays">0</span>
+        birthdays.
+      </div>
+      <div class="hindi">
+        आपने लगभग
+        <span id="birthdaysHindi">0</span>
+        जन्मदिन देखे हैं।
+      </div>
+
+      <div class="big-stat fade-stat">
+        That's roughly
+        <span id="sunTrips">0</span>
+        trips around the Sun.
+      </div>
+      <div class="hindi fade-stat">
+        यानी सूर्य के चारों ओर लगभग
+        <span id="sunTripsHindi">0</span>
+        चक्कर।
+      </div>
+    </div>
+  </section>
+
+  <!-- 19: MONTHS + WEEKS -->
+  <section class="screen life-stat-section">
+    <div class="story-icon">📅</div>
+    <div class="stat-content">
+      <div class="big-stat">
+        You've lived through about
+        <span id="monthsLived">0</span>
+        months.
+      </div>
+      <div class="hindi">
+        आपने लगभग
+        <span id="monthsLivedHindi">0</span>
+        महीने जिए हैं।
+      </div>
+
+      <div class="big-stat fade-stat">
+        That's around
+        <span id="weeksLived">0</span>
+        weeks.
+      </div>
+      <div class="hindi fade-stat">
+        यानी लगभग
+        <span id="weeksLivedHindi">0</span>
+        सप्ताह।
+      </div>
+    </div>
+  </section>
+
+  <!-- 20: FINAL SUMMARY -->
+  <section class="screen life-stat-section">
+    <div class="story-icon">🌎</div>
+    <div class="stat-content">
+      <div class="big-stat">
+        So far, you've been here for about
+        <span id="yearsExact">0</span>
+        years.
+      </div>
+      <div class="hindi">
+        अब तक आप इस दुनिया में लगभग
+        <span id="yearsExactHindi">0</span>
+        साल से हैं।
+      </div>
+
+      <div class="big-stat fade-stat">
+        And your story is still being written.
+      </div>
+      <div class="hindi fade-stat">
+        और आपकी कहानी अभी भी लिखी जा रही है।
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================
+       SCREEN 6
+       WEEKS GRID
+       ======================================================= -->
+
+  <section class="screen">
+
+    <h2>
+      Your Weeks
+    </h2>
+
+    <div class="hindi">
+      आपके जीवन के सप्ताह
+    </div>
+
+    <p
+      class="english"
+      style="margin-top:25px">
+      One square = one week
+    </p>
+
+    <p class="hindi">
+      एक बॉक्स = एक सप्ताह
+    </p>
+
+    <div class="weeks-wrap">
+
+      <div
+        id="weeksGrid"
+        class="weeks-grid">
+      </div>
+
+      <div class="week-legend">
+
+        Red = weeks already lived ·
+        लाल = बीते हुए सप्ताह
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+
+  <footer>
+
+    <div class="logo">
+      janu.fun
+    </div>
+
+    <p style="margin-top:10px;color:#777">
+
+      Life Stats · जीवन के आँकड़े
+
+    </p>
+
+  </footer>
+
+
+  <script>
+
+    /* ========================================================
+       GLOBAL VARIABLES
+       ======================================================== */
+
+    let birthDate = null;
+
+
+    /* ========================================================
+       NUMBER FORMATTER
+       ======================================================== */
+
+    function formatNumber(number) {
+
+      return Math.round(number).toLocaleString("en-IN");
+
+    }
+
+
+    /* ========================================================
+       SCREEN 1 -> SCREEN 2
+       ======================================================== */
+
+    function goToBirth() {
+
+      document
+        .getElementById("birthScreen")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
+    }
+
+
+    /* ========================================================
+       START LIFE STATS
+       ======================================================== */
+
+    function startLifeStats() {
+
+      const month =
+        Number(
+          document.getElementById("month").value
+        );
+
+      const day =
+        Number(
+          document.getElementById("day").value
+        );
+
+      const year =
+        Number(
+          document.getElementById("year").value
+        );
+
+      const error =
+        document.getElementById("error");
+
+      const today =
+        new Date();
+
+
+      /* Empty input */
+
+      if (!month || !day || !year) {
+
+        error.textContent =
+          "Please enter Month, Day and Year. / कृपया महीना, दिन और वर्ष भरें।";
+
+        return;
+
+      }
+
+
+      /* Create date */
+
+      const date =
+        new Date(
+          year,
+          month - 1,
+          day
+        );
+
+
+      /* Invalid date */
+
+      if (
+        date.getFullYear() !== year ||
+        date.getMonth() !== month - 1 ||
+        date.getDate() !== day
+      ) {
+
+        error.textContent =
+          "Please enter a valid date. / कृपया सही तारीख डालें।";
+
+        return;
+
+      }
+
+
+      /* Future date */
+
+      if (date > today) {
+
+        error.textContent =
+          "Birthdate cannot be in the future. / जन्म तारीख भविष्य की नहीं हो सकती।";
+
+        return;
+
+      }
+
+
+      /* Save DOB */
+
+      birthDate = date;
+
+      error.textContent = "";
+
+
+      /* Update all statistics */
+
+      updateLifeStats();
+
+
+      /* Scroll to next story */
+
+      document
+        .getElementById("daysScreen")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
+    }
+
+
+
+    /* ========================================================
+       CALCULATE + DISPLAY LIFE STATS
+       ======================================================== */
+
+    function updateLifeStats() {
+
+      if (!birthDate) return;
+
+      const now = new Date();
+
+      const difference =
+        now.getTime() -
+        birthDate.getTime();
+
+      const seconds =
+        difference / 1000;
+
+      const totalMinutes =
+        seconds / 60;
+
+      const totalHours =
+        seconds / 3600;
+
+      const totalDays =
+        Math.floor(difference / 86400000);
+
+      const totalWeeks =
+        Math.floor(totalDays / 7);
+
+      const totalMonths =
+        Math.floor(totalDays / 30.436875);
+
+      const totalYears =
+        totalDays / 365.2425;
+
+
+      /* =====================================================
+         EDITABLE FUN-ESTIMATE SETTINGS
+         Change these numbers later if you want.
+         ===================================================== */
+
+      const HEART_BEATS_PER_MINUTE = 72;
+      const BLOOD_ML_PER_BEAT = 70;
+      const BREATHS_PER_MINUTE = 15;
+      const BLINKS_PER_MINUTE = 15;
+
+      const SLEEP_HOURS_PER_DAY = 8;
+      const STEPS_PER_DAY = 4000;
+      const METERS_PER_STEP = 0.75;
+
+      const MEALS_PER_DAY = 3;
+      const WATER_LITERS_PER_DAY = 2;
+      const EATING_MINUTES_PER_DAY = 60;
+
+      const SHOWERS_PER_WEEK = 7;
+      const HAIR_GROWTH_CM_PER_MONTH = 1;
+      const NAIL_GROWTH_MM_PER_DAY = 0.1;
+
+      const LAUGHS_PER_DAY = 15;
+      const YAWS_PER_DAY = 5;
+
+
+      /* =====================================================
+         01. DAYS
+         ===================================================== */
+
+      setText("daysLived", totalDays);
+      setText("daysLivedHindi", totalDays);
+
+
+      /* =====================================================
+         CALENDAR
+         ===================================================== */
+
+      setText(
+        "weekday",
+        birthDate.toLocaleDateString(
+          "en-US",
+          { weekday: "long" }
+        )
+      );
+
+      setText(
+        "calendarDay",
+        birthDate.getDate()
+      );
+
+      setText(
+        "calendarDate",
+        birthDate.toLocaleDateString(
+          "en-US",
+          {
+            month: "short",
+            year: "numeric"
+          }
+        )
+      );
+
+
+      /* =====================================================
+         02. HEARTBEATS
+         ===================================================== */
+
+      const heartbeats =
+        totalMinutes *
+        HEART_BEATS_PER_MINUTE;
+
+      setText(
+        "heartbeats",
+        heartbeats
+      );
+
+      setText(
+        "heartbeatsHindi",
+        heartbeats
+      );
+
+
+      /* =====================================================
+         03. BLOOD PUMPED
+         ===================================================== */
+
+      const bloodLiters =
+        (heartbeats * BLOOD_ML_PER_BEAT) /
+        1000;
+
+      setText(
+        "bloodLiters",
+        bloodLiters
+      );
+
+      setText(
+        "bloodLitersHindi",
+        bloodLiters
+      );
+
+
+      /* =====================================================
+         04. RED BLOOD CELLS
+         Fun estimate
+         ===================================================== */
+
+      const redCells =
+        totalDays * 2500000;
+
+      setText(
+        "redCells",
+        redCells
+      );
+
+      setText(
+        "redCellsHindi",
+        redCells
+      );
+
+
+      /* =====================================================
+         05. BREATHS
+         ===================================================== */
+
+      const breaths =
+        totalMinutes *
+        BREATHS_PER_MINUTE;
+
+      setText(
+        "breaths",
+        breaths
+      );
+
+      setText(
+        "breathsHindi",
+        breaths
+      );
+
+
+      /* =====================================================
+         06. BLINKS
+         ===================================================== */
+
+      const blinks =
+        totalMinutes *
+        BLINKS_PER_MINUTE;
+
+      setText(
+        "blinks",
+        blinks
+      );
+
+      setText(
+        "blinksHindi",
+        blinks
+      );
+
+
+      /* =====================================================
+         07. SLEEP YEARS
+         ===================================================== */
+
+      const sleepHours =
+        totalDays *
+        SLEEP_HOURS_PER_DAY;
+
+      const sleepDays =
+        sleepHours / 24;
+
+      const sleepYears =
+        sleepDays / 365.2425;
+
+      setText(
+        "sleepYears",
+        sleepYears.toFixed(1)
+      );
+
+      setText(
+        "sleepYearsHindi",
+        sleepYears.toFixed(1)
+      );
+
+      setText(
+        "sleepDays",
+        sleepDays
+      );
+
+      setText(
+        "sleepDaysHindi",
+        sleepDays
+      );
+
+
+      /* =====================================================
+         08. AWAKE
+         ===================================================== */
+
+      const awakeHours =
+        totalDays *
+        (24 - SLEEP_HOURS_PER_DAY);
+
+      const awakeYears =
+        awakeHours /
+        24 /
+        365.2425;
+
+      setText(
+        "awakeYears",
+        awakeYears.toFixed(1)
+      );
+
+      setText(
+        "awakeYearsHindi",
+        awakeYears.toFixed(1)
+      );
+
+      setText(
+        "awakeHours",
+        awakeHours
+      );
+
+      setText(
+        "awakeHoursHindi",
+        awakeHours
+      );
+
+
+      /* =====================================================
+         09. STEPS
+         ===================================================== */
+
+      const steps =
+        totalDays *
+        STEPS_PER_DAY;
+
+      const walkKm =
+        (steps * METERS_PER_STEP) /
+        1000;
+
+      setText(
+        "steps",
+        steps
+      );
+
+      setText(
+        "stepsHindi",
+        steps
+      );
+
+      setText(
+        "walkKm",
+        walkKm
+      );
+
+      setText(
+        "walkKmHindi",
+        walkKm
+      );
+
+
+      /* =====================================================
+         10. MEALS
+         ===================================================== */
+
+      const meals =
+        totalDays *
+        MEALS_PER_DAY;
+
+      setText(
+        "meals",
+        meals
+      );
+
+      setText(
+        "mealsHindi",
+        meals
+      );
+
+
+      /* =====================================================
+         11. WATER
+         ===================================================== */
+
+      const waterLiters =
+        totalDays *
+        WATER_LITERS_PER_DAY;
+
+      setText(
+        "waterLiters",
+        waterLiters
+      );
+
+      setText(
+        "waterLitersHindi",
+        waterLiters
+      );
+
+
+      /* =====================================================
+         12. EATING TIME
+         ===================================================== */
+
+      const eatingDays =
+        (
+          totalDays *
+          EATING_MINUTES_PER_DAY
+        ) / 1440;
+
+      setText(
+        "eatingDays",
+        eatingDays.toFixed(1)
+      );
+
+      setText(
+        "eatingDaysHindi",
+        eatingDays.toFixed(1)
+      );
+
+
+      /* =====================================================
+         13. SHOWERS
+         ===================================================== */
+
+      const showers =
+        totalWeeks *
+        SHOWERS_PER_WEEK;
+
+      setText(
+        "showers",
+        showers
+      );
+
+      setText(
+        "showersHindi",
+        showers
+      );
+
+
+      /* =====================================================
+         14. HAIR GROWTH
+         ===================================================== */
+
+      const hairMeters =
+        (
+          totalMonths *
+          HAIR_GROWTH_CM_PER_MONTH
+        ) / 100;
+
+      setText(
+        "hairMeters",
+        hairMeters.toFixed(1)
+      );
+
+      setText(
+        "hairMetersHindi",
+        hairMeters.toFixed(1)
+      );
+
+
+      /* =====================================================
+         15. NAIL GROWTH
+         ===================================================== */
+
+      const nailsMeters =
+        (
+          totalDays *
+          NAIL_GROWTH_MM_PER_DAY
+        ) / 1000;
+
+      setText(
+        "nailsMeters",
+        nailsMeters.toFixed(2)
+      );
+
+      setText(
+        "nailsMetersHindi",
+        nailsMeters.toFixed(2)
+      );
+
+
+      /* =====================================================
+         16. LAUGHTER
+         ===================================================== */
+
+      const laughs =
+        totalDays *
+        LAUGHS_PER_DAY;
+
+      setText(
+        "laughs",
+        laughs
+      );
+
+      setText(
+        "laughsHindi",
+        laughs
+      );
+
+
+      /* =====================================================
+         17. YAWS
+         ===================================================== */
+
+      const yawns =
+        totalDays *
+        YAWS_PER_DAY;
+
+      setText(
+        "yawns",
+        yawns
+      );
+
+      setText(
+        "yawnsHindi",
+        yawns
+      );
+
+
+      /* =====================================================
+         18. BIRTHDAYS + SUN TRIPS
+         ===================================================== */
+
+      const birthdays =
+        Math.floor(totalYears);
+
+      setText(
+        "birthdays",
+        birthdays
+      );
+
+      setText(
+        "birthdaysHindi",
+        birthdays
+      );
+
+      setText(
+        "sunTrips",
+        birthdays
+      );
+
+      setText(
+        "sunTripsHindi",
+        birthdays
+      );
+
+
+      /* =====================================================
+         19. MONTHS + WEEKS
+         ===================================================== */
+
+      setText(
+        "monthsLived",
+        totalMonths
+      );
+
+      setText(
+        "monthsLivedHindi",
+        totalMonths
+      );
+
+      setText(
+        "weeksLived",
+        totalWeeks
+      );
+
+      setText(
+        "weeksLivedHindi",
+        totalWeeks
+      );
+
+
+      /* =====================================================
+         20. FINAL
+         ===================================================== */
+
+      setText(
+        "yearsExact",
+        totalYears.toFixed(2)
+      );
+
+      setText(
+        "yearsExactHindi",
+        totalYears.toFixed(2)
+      );
+
+
+      /* =====================================================
+         WEEKS GRID UPDATE
+         ===================================================== */
+
+      document
+        .querySelectorAll(".week")
+        .forEach(
+          function(week, index) {
+
+            if (index < totalWeeks) {
+              week.classList.add("past");
+            } else {
+              week.classList.remove("past");
+            }
+
+          }
+        );
+    }
+
+
+    /* ========================================================
+       SAFE TEXT HELPER
+       ======================================================== */
+
+    function setText(id, value) {
+
+      const element =
+        document.getElementById(id);
+
+      if (!element) return;
+
+      if (
+        typeof value === "number" &&
+        !Number.isInteger(value)
+      ) {
+        element.textContent =
+          value.toLocaleString(
+            "en-IN",
+            {
+              maximumFractionDigits: 2
+            }
+          );
+      } else {
+        element.textContent =
+          Number(value).toLocaleString(
+            "en-IN"
+          );
+      }
+
+    }
+
+
+    /* ========================================================
+       CREATE 4160 WEEK BOXES
+       80 years × 52 weeks
+       ======================================================== */
+
+    function createWeeks() {
+
+      const grid =
+        document.getElementById(
+          "weeksGrid"
+        );
+
+
+      const totalWeeks =
+        80 * 52;
+
+
+      for (
+        let i = 0;
+        i < totalWeeks;
+        i++
+      ) {
+
+        const box =
+          document.createElement(
+            "div"
+          );
+
+
+        box.className =
+          "week";
+
+
+        box.title =
+          "Week " +
+          (i + 1);
+
+
+        grid.appendChild(
+          box
+        );
+
+      }
+
+    }
+
+
+    /* ========================================================
+       CREATE GRID WHEN PAGE OPENS
+       ======================================================== */
+
+    createWeeks();
+
+
+    /* ========================================================
+       LIVE UPDATE
+       ======================================================== */
+
+    setInterval(
+      updateLifeStats,
+      1000
+    );
+
+  </script>
+
+</body>
+</html>
