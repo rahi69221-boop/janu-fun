@@ -1,0 +1,99 @@
+/* janu.fun - style.css */
+:root{
+  --bg:#070b16;
+  --card:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.14);
+  --text:#f7f8ff;
+  --muted:#aeb6cc;
+  --accent:#7c5cff;
+  --accent2:#00d4ff;
+  --shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 15% 10%,rgba(124,92,255,.25),transparent 30%),
+    radial-gradient(circle at 85% 20%,rgba(0,212,255,.18),transparent 28%),
+    var(--bg);
+}
+
+.container{width:min(1100px,92%);margin:auto}
+.hero{text-align:center;padding:55px 0 30px}
+.logo{
+  font-size:clamp(42px,9vw,78px);
+  font-weight:900;
+  letter-spacing:-3px;
+  margin:0;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.hindi{font-size:clamp(18px,4vw,28px);margin:8px 0;color:var(--muted)}
+.subtitle{color:var(--muted);font-size:16px}
+
+.panel{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:24px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(14px);
+  margin:20px 0;
+}
+
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+label{display:block;color:var(--muted);font-size:14px;margin-bottom:7px}
+input,button,select{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:13px 15px;
+  font:inherit;
+}
+input,select{
+  color:var(--text);
+  background:rgba(0,0,0,.25);
+}
+button{
+  cursor:pointer;
+  color:white;
+  font-weight:800;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  border:0;
+  transition:transform .2s,filter .2s;
+}
+button:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.full{grid-column:1/-1}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+.stat{
+  padding:20px;
+  border-radius:18px;
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--border);
+}
+.stat h3{margin:0 0 8px;font-size:15px;color:var(--muted)}
+.stat strong{font-size:clamp(22px,4vw,34px)}
+.stat small{display:block;color:var(--muted);margin-top:5px}
+
+.blink{animation:blink .9s infinite alternate}
+@keyframes blink{from{opacity:1}to{opacity:.45}}
+
+footer{text-align:center;color:var(--muted);padding:35px 0 50px}
+
+@media(max-width:700px){
+  .form-grid,.stats{grid-template-columns:1fr}
+  .full{grid-column:auto}
+  .panel{padding:17px}
+}
