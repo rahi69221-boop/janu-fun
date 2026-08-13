@@ -2100,4 +2100,78 @@
   </div>
 </a>
 </body>
+  <!-- START SCREEN -->
+<div id="startScreen">
+
+  <a href="#" onclick="openLifeStats(); return false;" class="start-card life-card">
+    <div class="card-emoji">🌍 ❤️ ☁️</div>
+    <h1>Life Stats</h1>
+    <p>Explore Your Life</p>
+  </a>
+
+  <a href="elon-musk.html" class="start-card elon-card">
+    <div class="card-emoji">💰 🚀</div>
+    <h1>Spend Elon Musk's Money</h1>
+    <p>Tap to play</p>
+  </a>
+
+</div>
+
+<style>
+#startScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: white;
+  overflow-y: auto;
+  padding: 20px 15px;
+  box-sizing: border-box;
+}
+
+.start-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border: 4px solid #222;
+  border-radius: 25px;
+  margin-bottom: 20px;
+  padding: 35px 15px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.life-card {
+  background: #f5ffd9;
+}
+
+.elon-card {
+  background: #e8f5ff;
+}
+
+.start-card h1 {
+  font-size: 42px;
+  margin: 15px 0 10px;
+}
+
+.start-card p {
+  font-size: 20px;
+  margin: 0;
+}
+
+.card-emoji {
+  font-size: 45px;
+}
+
+@media (max-width: 500px) {
+  .start-card h1 {
+    font-size: 34px;
+  }
+}
+</style>
+
+<script>
+function openLifeStats() {
+  document.getElementById("startScreen").style.display = "none";
+}
+</script>
 </html>
