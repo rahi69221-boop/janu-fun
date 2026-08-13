@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spend Elon Musk's Money</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f6f7;
+    color: #292929;
+}
+
+.header {
+    background: white;
+    text-align: center;
+    padding: 45px 15px 35px;
+}
+
+.profile {
+    width: 190px;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 35px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.15);
+}
+
+.title {
+    font-size: 42px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.balance {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(90deg, #00d084, #00bd9c);
+    color: white;
+    text-align: center;
+    font-size: 42px;
+    font-weight: 800;
+    padding: 28px 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.15);
+}
+
+.balance small {
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+    opacity: .9;
+    margin-top: 5px;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+}
+
+.item {
+    background: white;
+    margin: 12px 0;
+    padding: 28px 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+}
+
+.number {
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.emoji {
+    font-size: 85px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.name {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 10px 0 5px;
+}
+
+.price {
+    color: #00bd8b;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    align-items: center;
+}
+
+button,
+.quantity {
+    height: 58px;
+    border-radius: 7px;
+    font-size: 20px;
+    border: 1px solid #d5d9dc;
+}
+
+button {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.sell {
+    background: #eef1f3;
+    color: #333;
+}
+
+.buy {
+    background: #00cc78;
+    color: white;
+    border: none;
+}
+
+.quantity {
+    width: 100%;
+    text-align: center;
+    outline: none;
+    background: white;
+}
+
+.quantity:focus {
+    border: 2px solid #00c982;
+}
+
+.buy:disabled,
+.sell:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.owned {
+    margin-top: 12px;
+    color: #777;
+    font-size: 14px;
+}
+
+.footer {
+    text-align: center;
+    padding: 35px 15px;
+    color: #777;
+    font-size: 13px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    .header {
+        padding: 38px 10px 30px;
+    }
+
+    .profile {
+        width: 180px;
+        height: 180px;
+        margin-bottom: 30px;
+    }
+
+    .title {
+        font-size: 34px;
+        line-height: 1.15;
+    }
+
+    .balance {
+        font-size: 31px;
+        padding: 23px 5px;
+    }
+
+    .item {
+        margin: 10px 0;
+        padding: 25px 15px;
+        border-radius: 8px;
+    }
+
+    .emoji {
+        font-size: 75px;
+        height: 90px;
+    }
+
+    .name {
+        font-size: 29px;
+    }
+
+    .price {
+        font-size: 26px;
+    }
+
+    .controls {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+    }
+
+    button,
+    .quantity {
+        height: 56px;
+        font-size: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <!-- Elon Musk real photo -->
+    <img
+        class="profile"
+        src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Elon_Musk_(54348704377).jpg?width=600"
+        alt="Elon Musk"
+        onerror="this.src='https://commons.wikimedia.org/wiki/Special:Redirect/file/Elon_musk.jpg?width=600'"
+    >
+
+    <h1 class="title">Spend Elon Musk's Money</h1>
+
+</header>
+
+<div class="balance">
+    $<span id="money">889,900,000,000</span>
+    <small>Forbes Real-Time Net Worth • 13 Aug 2026</small>
+</div>
+
+<main class="container" id="items"></main>
+
+<div class="footer">
+    Elon Musk's estimated net worth changes over time.
+</div>
+
+<script>
+
+/* =========================================
+   STARTING MONEY
+   Forbes Real-Time: $889.9 Billion
+========================================= */
+
+let money = 889900000000;
+
+
+/* =========================================
+   40 ITEMS
+========================================= */
+
+const products = [
+
+    ["🍔", "Big Mac", 2],
+    ["🩴", "Flip Flops", 3],
+    ["🎧", "AirPods", 199],
+    ["👟", "Air Jordans", 250],
+    ["🎮", "Gaming PC", 3000],
+    ["🏍️", "Ninja Bike", 6000],
+    ["🏍️", "KTM Super Duke", 20000],
+    ["🚗", "Tesla Model 3", 40000],
+    ["🚗", "Tesla Cybertruck", 100000],
+    ["🏎️", "Ferrari", 250000],
+    ["🏎️", "Lamborghini", 300000],
+    ["🚁", "Luxury Helicopter", 15000000],
+    ["🛥️", "Luxury Yacht", 100000000],
+    ["🚢", "Cruise Ship", 1000000000],
+    ["✈️", "Private Jet", 80000000],
+    ["✈️", "Boeing 747", 400000000],
+    ["🚄", "Bullet Train", 500000000],
+    ["🚂", "Luxury Private Train", 350000000],
+    ["🏝️", "Private Island", 50000000],
+    ["🏰", "Mega Mansion", 100000000],
+    ["🏙️", "Skyscraper", 1000000000],
+    ["🏨", "7-Star Hotel", 2000000000],
+    ["🏟️", "Football Stadium", 2500000000],
+    ["🏀", "NBA Team", 6000000000],
+    ["⚽", "Football Club", 5000000000],
+    ["🎢", "Theme Park", 3000000000],
+    ["🌃", "Downtown City Block", 10000000000],
+    ["🏙️", "Entire Skyscraper Complex", 15000000000],
+    ["🏝️", "Private Island Kingdom", 25000000000],
+    ["🌉", "Mega Bridge", 20000000000],
+    ["🏛️", "Famous Museum", 50000000000],
+    ["🎨", "Mona Lisa*", 1000000000000],
+    ["💎", "World's Biggest Diamond", 2000000000000],
+    ["🏙️", "Mega City", 50000000000000],
+    ["🌍", "Entire Country*", 100000000000000],
+    ["🌕", "Moon Base*", 1000000000000000],
+    ["🚀", "Mars Colony*", 10000000000000000],
+    ["🪐", "Private Space Station*", 50000000000000000],
+    ["🌌", "Space Empire*", 1000000000000000000],
+    ["👑", "Own Planet*", 999999999999999999999]
+];
+
+
+/* =========================================
+   OWNED QUANTITIES
+========================================= */
+
+let owned = new Array(products.length).fill(0);
+
+
+/* =========================================
+   FORMAT MONEY
+========================================= */
+
+function formatMoney(number) {
+
+    return Number(number).toLocaleString("en-US");
+}
+
+
+/* =========================================
+   UPDATE BALANCE
+========================================= */
+
+function updateBalance() {
+
+    document.getElementById("money").textContent =
+        formatMoney(money);
+
+}
+
+
+/* =========================================
+   CREATE ITEMS
+========================================= */
+
+const container = document.getElementById("items");
+
+products.forEach((product, index) => {
+
+    const emoji = product[0];
+    const name = product[1];
+    const price = product[2];
+
+    const item = document.createElement("div");
+
+    item.className = "item";
+
+    item.innerHTML = `
+
+        <div class="number">${index + 1}</div>
+
+        <div class="emoji">${emoji}</div>
+
+        <div class="name">${name}</div>
+
+        <div class="price">$${formatMoney(price)}</div>
+
+        <div class="controls">
+
+            <button
+                class="sell"
+                id="sell-${index}"
+                onclick="sellItem(${index})">
+                Sell
+            </button>
+
+            <input
+                class="quantity"
+                id="qty-${index}"
+                type="number"
+                min="0"
+                value="0"
+                inputmode="numeric"
+                onclick="event.stopPropagation()"
+                onchange="manualQuantity(${index})"
+            >
+
+            <button
+                class="buy"
+                id="buy-${index}"
+                onclick="buyItem(${index})">
+                Buy
+            </button>
+
+        </div>
+
+        <div class="owned" id="owned-${index}">
+            Owned: 0
+        </div>
+    `;
+
+    /*
+       Tap anywhere on the item:
+       quantity input automatically gets focus.
+    */
+
+    item.addEventListener("click", function(e) {
+
+        if (
+            e.target.tagName !== "BUTTON" &&
+            e.target.tagName !== "INPUT"
+        ) {
+
+            document.getElementById(`qty-${index}`).focus();
+
+        }
+
+    });
+
+    container.appendChild(item);
+
+    updateButtons(index);
+
+});
+
+
+/* =========================================
+   BUY
+========================================= */
+
+function buyItem(index) {
+
+    const price = products[index][2];
+
+    if (money >= price) {
+
+        money -= price;
+
+        owned[index]++;
+
+        updateItem(index);
+
+        updateBalance();
+
+    } else {
+
+        alert(
+            "Not enough money!\n\n" +
+            "You need $" + formatMoney(price) +
+            " but you only have $" + formatMoney(money) + "."
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   SELL
+========================================= */
+
+function sellItem(index) {
+
+    const price = products[index][2];
+
+    if (owned[index] > 0) {
+
+        owned[index]--;
+
+        money += price;
+
+        updateItem(index);
+
+        updateBalance();
+
+    } else {
+
+        alert("You don't own this item.");
+
+    }
+
+}
+
+
+/* =========================================
+   MANUAL QUANTITY
+========================================= */
+
+function manualQuantity(index) {
+
+    const input =
+        document.getElementById(`qty-${index}`);
+
+    let wanted = parseInt(input.value);
+
+    if (isNaN(wanted) || wanted < 0) {
+
+        wanted = 0;
+
+        input.value = 0;
+
+    }
+
+    const current = owned[index];
+
+    /*
+       User increased quantity manually
+    */
+
+    if (wanted > current) {
+
+        const extra = wanted - current;
+
+        const price = products[index][2];
+
+        const totalCost = extra * price;
+
+        if (totalCost <= money) {
+
+            money -= totalCost;
+
+            owned[index] = wanted;
+
+        } else {
+
+            alert(
+                "Not enough money!\n\n" +
+                "You cannot buy " + extra +
+                " more " + products[index][1] + "."
+            );
+
+            input.value = current;
+
+        }
+
+    }
+
+    /*
+       User decreased quantity manually
+    */
+
+    else if (wanted < current) {
+
+        const sold = current - wanted;
+
+        const price = products[index][2];
+
+        money += sold * price;
+
+        owned[index] = wanted;
+
+    }
+
+    updateItem(index);
+
+    updateBalance();
+
+}
+
+
+/* =========================================
+   UPDATE ITEM
+========================================= */
+
+function updateItem(index) {
+
+    document.getElementById(`qty-${index}`).value =
+        owned[index];
+
+    document.getElementById(`owned-${index}`).textContent =
+        "Owned: " + formatMoney(owned[index]);
+
+    updateButtons(index);
+
+}
+
+
+/* =========================================
+   BUTTON STATES
+========================================= */
+
+function updateButtons(index) {
+
+    const price = products[index][2];
+
+    const buyButton =
+        document.getElementById(`buy-${index}`);
+
+    const sellButton =
+        document.getElementById(`sell-${index}`);
+
+    buyButton.disabled = money < price;
+
+    sellButton.disabled = owned[index] <= 0;
+
+}
+
+
+/* =========================================
+   UPDATE ALL BUTTONS
+========================================= */
+
+function updateAllButtons() {
+
+    products.forEach((_, index) => {
+
+        updateButtons(index);
+
+    });
+
+}
+
+
+/*
+   Keep Buy buttons updated when money changes.
+*/
+
+const originalUpdateBalance = updateBalance;
+
+updateBalance = function() {
+
+    originalUpdateBalance();
+
+    updateAllButtons();
+
+};
+
+updateBalance();
+
+</script>
+
+</body>
+</html>
