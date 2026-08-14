@@ -2134,6 +2134,130 @@
 
 </section>
 <style>
+/* =========================
+   WHAT IF
+========================= */
+
+.what-if-screen {
+  min-height: 100vh;
+  padding: 100px 20px 70px;
+  background: #ffffff;
+}
+
+.what-if-header {
+  max-width: 900px;
+  margin: 0 auto 45px;
+  text-align: center;
+}
+
+.what-if-icon {
+  font-size: 100px;
+  margin-bottom: 20px;
+}
+
+.what-if-header h2 {
+  font-size: clamp(55px, 12vw, 100px);
+  line-height: 1;
+  letter-spacing: -3px;
+  margin: 0 0 20px;
+}
+
+.what-if-list {
+  max-width: 900px;
+  margin: auto;
+  display: grid;
+  gap: 20px;
+}
+
+.what-if-card {
+  background: #f7f7f7;
+  border: 3px solid #111;
+  border-radius: 20px;
+  padding: 25px;
+  text-align: left;
+  box-shadow: 6px 6px 0 #111;
+}
+
+.what-if-number {
+  color: #777;
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.what-if-question-en {
+  font-size: 27px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.what-if-question-hi {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.45;
+  margin-top: 8px;
+}
+
+.what-if-answer {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 2px solid #ddd;
+}
+
+.what-if-label {
+  font-size: 14px;
+  font-weight: 900;
+  color: #ff5261;
+  margin-bottom: 7px;
+}
+
+.what-if-text-en,
+.what-if-text-hi {
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.what-if-text-hi {
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+.what-if-disclaimer {
+  max-width: 900px;
+  margin: 35px auto 0;
+  color: #777;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width:600px) {
+
+  .what-if-screen {
+    padding: 80px 15px 50px;
+  }
+
+  .what-if-icon {
+    font-size: 75px;
+  }
+
+  .what-if-card {
+    padding: 20px;
+  }
+
+  .what-if-question-en {
+    font-size: 24px;
+  }
+
+  .what-if-question-hi {
+    font-size: 19px;
+  }
+
+  .what-if-text-en,
+  .what-if-text-hi {
+    font-size: 16px;
+  }
+  }
 #startScreen {
   position: fixed;
   inset: 0;
