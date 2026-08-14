@@ -2325,5 +2325,193 @@
 function openLifeStats() {
   document.getElementById("startScreen").style.display = "none";
 }
+  /* =========================
+   WHAT IF DATA
+========================= */
+
+const whatIfQuestions = [
+  {
+    no: 1,
+    en: "What if Earth's gravity became 50% weaker?",
+    hi: "अगर Earth की gravity 50% कम हो जाए?",
+
+    answerEn:
+      "You would weigh about half as much. Jumping and lifting objects would become much easier. Over the long term, muscles and bones could weaken because the body would face less mechanical loading.",
+
+    answerHi:
+      "आपका वजन लगभग आधा महसूस होगा। कूदना और भारी सामान उठाना बहुत आसान हो जाएगा। लंबे समय में कम mechanical loading के कारण muscles और bones कमजोर हो सकते हैं।"
+  },
+
+  {
+    no: 2,
+    en: "What if Earth's gravity became twice as strong?",
+    hi: "अगर Earth की gravity 2× हो जाए?",
+
+    answerEn:
+      "You would effectively weigh twice as much. Walking, running and even standing would become much harder, while buildings and infrastructure would face much greater structural loads.",
+
+    answerHi:
+      "आपका effective weight लगभग दोगुना हो जाएगा। चलना, दौड़ना और खड़े रहना बहुत कठिन हो जाएगा, जबकि buildings और infrastructure पर बहुत ज्यादा structural load पड़ेगा।"
+  },
+
+  {
+    no: 3,
+    en: "What if Earth suddenly stopped rotating?",
+    hi: "अगर Earth अचानक घूमना बंद कर दे?",
+
+    answerEn:
+      "Anything not firmly attached to Earth would retain much of its existing rotational motion. Enormous winds and ocean movement would follow, producing catastrophic effects.",
+
+    answerHi:
+      "जो चीजें Earth से मजबूती से जुड़ी नहीं होंगी, वे अपनी rotational motion का बड़ा हिस्सा बनाए रखेंगी। इससे बहुत तेज हवाएं और ocean movement पैदा होंगे और भारी तबाही हो सकती है।"
+  },
+
+  {
+    no: 4,
+    en: "What if Earth rotated twice as fast?",
+    hi: "अगर Earth 2× तेज घूमने लगे?",
+
+    answerEn:
+      "A rotation twice as fast would make the day much shorter. Coriolis effects would become stronger and the distribution of atmospheric and oceanic motion would change substantially.",
+
+    answerHi:
+      "Earth की rotation दोगुनी होने पर दिन काफी छोटा हो जाएगा। Coriolis effects मजबूत होंगे और atmosphere तथा oceans की movement में बड़ा बदलाव आएगा।"
+  },
+
+  {
+    no: 5,
+    en: "What if Earth moved closer to the Sun?",
+    hi: "अगर Earth Sun के और पास चली जाए?",
+
+    answerEn:
+      "Earth would receive more solar energy. The climate would become hotter, oceans could lose water faster and the conditions for life could deteriorate severely.",
+
+    answerHi:
+      "Earth को ज्यादा solar energy मिलेगी। Climate बहुत गर्म होगा, oceans का water तेजी से कम हो सकता है और जीवन के लिए परिस्थितियां गंभीर रूप से खराब हो सकती हैं।"
+  },
+
+  {
+    no: 6,
+    en: "What if Earth moved twice as far from the Sun?",
+    hi: "अगर Earth Sun से 2× दूर चली जाए?",
+
+    answerEn:
+      "Earth would receive only about one-quarter of its current solar energy, making the planet dramatically colder and threatening the stability of liquid water and agriculture.",
+
+    answerHi:
+      "Earth को अभी की तुलना में लगभग एक-चौथाई solar energy मिलेगी। इससे planet बहुत ठंडा हो जाएगा और liquid water तथा agriculture पर गंभीर असर पड़ेगा।"
+  },
+
+  {
+    no: 7,
+    en: "What if Earth's atmosphere became half as thick?",
+    hi: "अगर Earth का atmosphere आधा हो जाए?",
+
+    answerEn:
+      "Surface air pressure would fall substantially. Breathing would become dangerous and the boiling point of water would decrease.",
+
+    answerHi:
+      "Surface air pressure काफी कम हो जाएगा। सांस लेना खतरनाक हो जाएगा और पानी का boiling point भी कम हो जाएगा।"
+  },
+
+  {
+    no: 8,
+    en: "What if Earth's atmosphere became twice as thick?",
+    hi: "अगर Earth का atmosphere 2× thick हो जाए?",
+
+    answerEn:
+      "Air resistance would become much stronger and weather and climate would change substantially. Aircraft, vehicles and living organisms would all experience a very different atmosphere.",
+
+    answerHi:
+      "Air resistance बहुत बढ़ जाएगा और weather तथा climate में बड़ा बदलाव आएगा। Aircraft, vehicles और living organisms को बिल्कुल अलग atmosphere का सामना करना पड़ेगा।"
+  },
+
+  {
+    no: 9,
+    en: "What if atmospheric oxygen reached 50%?",
+    hi: "अगर oxygen 50% हो जाए?",
+
+    answerEn:
+      "A much oxygen-rich atmosphere would greatly increase fire risk. Wildfires could ignite and spread far more easily, making many environments extremely dangerous.",
+
+    answerHi:
+      "बहुत ज्यादा oxygen वाली atmosphere में fire risk बहुत बढ़ जाएगा। जंगलों की आग और दूसरी fires ज्यादा आसानी से शुरू और फैल सकती हैं।"
+  },
+
+  {
+    no: 10,
+    en: "What if atmospheric oxygen fell to only 10%?",
+    hi: "अगर oxygen सिर्फ 10% रह जाए?",
+
+    answerEn:
+      "Most humans would struggle to get enough oxygen. High-altitude-like hypoxia would become widespread and normal human activity would become extremely difficult.",
+
+    answerHi:
+      "ज्यादातर लोगों को पर्याप्त oxygen नहीं मिलेगी। High-altitude जैसी hypoxia व्यापक हो जाएगी और सामान्य human activity बहुत कठिन हो जाएगी।"
+  }
+
+  // Isi format mein 11–100 questions add honge.
+];
+
+
+/* =========================
+   BUILD WHAT IF CARDS
+========================= */
+
+function renderWhatIf() {
+
+  const container =
+    document.getElementById("whatIfList");
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  whatIfQuestions.forEach(item => {
+
+    const card =
+      document.createElement("article");
+
+    card.className = "what-if-card";
+
+    card.innerHTML = `
+      <div class="what-if-number">
+        #${item.no}
+      </div>
+
+      <div class="what-if-question-en">
+        ${item.en}
+      </div>
+
+      <div class="what-if-question-hi">
+        ${item.hi}
+      </div>
+
+      <div class="what-if-answer">
+
+        <div class="what-if-label">
+          ENGLISH
+        </div>
+
+        <div class="what-if-text-en">
+          ${item.answerEn}
+        </div>
+
+        <div class="what-if-label" style="margin-top:18px;">
+          हिंदी
+        </div>
+
+        <div class="what-if-text-hi">
+          ${item.answerHi}
+        </div>
+
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+renderWhatIf();
 </script>
 </html>
