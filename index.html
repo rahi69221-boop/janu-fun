@@ -2002,30 +2002,29 @@
        ======================================================== */
 
     function setText(id, value) {
+  const element = document.getElementById(id);
 
-      const element =
-        document.getElementById(id);
+  if (!element) return;
 
-      if (!element) return;
+  // Text जैसे Monday, Tuesday, Jan 2025 को सीधे दिखाओ
+  if (typeof value === "string") {
+    element.textContent = value;
+    return;
+  }
 
-      if (
-        typeof value === "number" &&
-        !Number.isInteger(value)
-      ) {
-        element.textContent =
-          value.toLocaleString(
-            "en-IN",
-            {
-              maximumFractionDigits: 2
-            }
-          );
-      } else {
-        element.textContent =
-          Number(value).toLocaleString(
-            "en-IN"
-          );
-      }
+  // Decimal numbers
+  if (
+    typeof value === "number" &&
+    !Number.isInteger(value)
+  ) {
+    element.textContent = value.toLocaleString("en-IN", {
+      maximumFractionDigits: 2
+    });
+    return;
+  }
 
+  // Normal numbers
+  element.textContent = Number(value).toLocaleString("en-IN");
     }
 
 
